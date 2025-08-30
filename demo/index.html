@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Chatbot Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .demo-container { max-width: 1200px; margin: 0 auto; }
+        .chatbot-section { margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .controls { margin-bottom: 20px; }
+        .control-group { margin-bottom: 15px; }
+        .control-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .control-group input, .control-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Smart Chatbot Demo</h1>
+        <p>This demo shows the SmartChatbot component with different LLM providers.</p>
+        
+        <div class="chatbot-section">
+            <h3>OpenAI Chatbot</h3>
+            <div class="controls">
+                <div class="control-group">
+                    <label>API Key:</label>
+                    <input type="password" placeholder="sk-..." />
+                </div>
+                <div class="control-group">
+                    <label>Model:</label>
+                    <select>
+                        <option>gpt-4o-mini</option>
+                        <option>gpt-4o</option>
+                    </select>
+                </div>
+            </div>
+            <div id="openai-chatbot">OpenAI Chatbot placeholder</div>
+        </div>
+
+        <div class="chatbot-section">
+            <h3>Anthropic Chatbot</h3>
+            <div class="controls">
+                <div class="control-group">
+                    <label>API Key:</label>
+                    <input type="password" placeholder="sk-ant-..." />
+                </div>
+                <div class="control-group">
+                    <label>Model:</label>
+                    <select>
+                        <option>claude-3-sonnet</option>
+                        <option>claude-3-opus</option>
+                    </select>
+                </div>
+            </div>
+            <div id="anthropic-chatbot">Anthropic Chatbot placeholder</div>
+        </div>
+
+        <div class="chatbot-section">
+            <h3>Gemini Chatbot</h3>
+            <div class="controls">
+                <div class="control-group">
+                    <label>API Key:</label>
+                    <input type="password" placeholder="AIza..." />
+                </div>
+                <div class="control-group">
+                    <label>Model:</label>
+                    <select>
+                        <option>gemini-1.5-pro</option>
+                        <option>gemini-1.5-flash</option>
+                    </select>
+                </div>
+            </div>
+            <div id="gemini-chatbot">Gemini Chatbot placeholder</div>
+        </div>
+    </div>
+</body>
+</html>
