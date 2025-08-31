@@ -1,5 +1,5 @@
 {
-  "name": "smart-chatbot",
+  "name": "brained-chatbot",
   "version": "1.0.0",
   "description": "A React component for building smart chatbots with support for OpenAI, Anthropic, and Google Gemini",
   "main": "dist/index.js",

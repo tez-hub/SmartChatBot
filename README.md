@@ -1,4 +1,4 @@
-# Smart Chatbot
+# Brained Chatbot
 
 A React component for building smart chatbots with support for OpenAI, Anthropic, and Google Gemini LLM providers.
 
@@ -14,13 +14,13 @@ A React component for building smart chatbots with support for OpenAI, Anthropic
 ## Installation
 
 ```bash
-Will update soon
+npm i brained-chatbot
 ```
 
 ## Quick Start
 
 ```jsx
-import { SmartChatbot } from 'smart-chatbot';
+import { SmartChatbot } from 'brained-chatbot';
 
 function App() {
   return (
