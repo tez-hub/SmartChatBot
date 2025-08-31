@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Chatbot Example</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .api-key-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .input-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .instructions {
+            text-align: left;
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+            overflow-x: auto;
+        }
+        
+        .note {
+            background: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Floating Chatbot Example</h1>
+        
+        <div class="content">
+            <h2>How to Use the Floating Chatbot</h2>
+            <p>This example shows how to integrate the floating chatbot widget into your web application without npm installation.</p>
+        </div>
+        
+        <div class="api-key-section">
+            <h3>🔑 Enter Your API Keys</h3>
+            <p>Add your API keys below to test the floating chatbot:</p>
+            
+            <div class="input-group">
+                <label for="openai-key">OpenAI API Key:</label>
+                <input 
+                    type="password" 
+                    id="openai-key" 
+                    placeholder="Enter OpenAI API Key (sk-...)"
+                    onchange="updateChatbot()"
+                >
+            </div>
+            
+            <div class="input-group">
+                <label for="anthropic-key">Anthropic API Key:</label>
+                <input 
+                    type="password" 
+                    id="anthropic-key" 
+                    placeholder="Enter Anthropic API Key (sk-ant-...)"
+                    onchange="updateChatbot()"
+                >
+            </div>
+            
+            <div class="input-group">
+                <label for="gemini-key">Gemini API Key:</label>
+                <input 
+                    type="password" 
+                    id="gemini-key" 
+                    placeholder="Enter Gemini API Key (AIza...)"
+                    onchange="updateChatbot()"
+                >
+            </div>
+        </div>
+        
+        <div class="content">
+            <h3>📋 Integration Instructions</h3>
+            <div class="instructions">
+                <p><strong>Step 1:</strong> Copy the source files to your project:</p>
+                <div class="code-block">
+                    your-project/
+                    ├── src/
+                    │   ├── SmartChatbot.jsx
+                    │   ├── SmartChatbot.css
+                    │   └── llm.js
+                    └── index.html
+                </div>
+                
+                <p><strong>Step 2:</strong> Import and use the component:</p>
+                <div class="code-block">
+import SmartChatbot from './src/SmartChatbot.jsx';
+import './src/SmartChatbot.css';
+
+// Floating chatbot at bottom-right
+&lt;SmartChatbot
+  provider="openai"
+  apiKey="your-api-key"
+  model="gpt-4o-mini"
+  isFloating={true}
+  position="bottom-right"
+  theme="light"
+/&gt;
+                </div>
+                
+                <p><strong>Available Positions:</strong></p>
+                <ul>
+                    <li><code>bottom-right</code> - Bottom right corner (default)</li>
+                    <li><code>bottom-left</code> - Bottom left corner</li>
+                    <li><code>top-right</code> - Top right corner</li>
+                    <li><code>top-left</code> - Top left corner</li>
+                </ul>
+                
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>💬 Floating chat bubble that expands when clicked</li>
+                    <li>🎨 Light and dark themes</li>
+                    <li>📱 Responsive design for mobile devices</li>
+                    <li>💾 Conversation persistence with localStorage</li>
+                    <li>🔧 Support for OpenAI, Anthropic, and Gemini</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="note">
+            <strong>💡 Tip:</strong> The floating chatbot will appear as a chat bubble icon. Click it to expand the full chat interface. Use the minimize button (➖) to collapse it back to the bubble.
+        </div>
+    </div>
+
+    <!-- React and ReactDOM CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Floating Chatbot Component -->
+    <script type="text/babel">
+        // Simple floating chatbot component for demonstration
+        function FloatingChatbot({ provider, apiKey, model, position, theme }) {
+            const [isExpanded, setIsExpanded] = React.useState(false);
+            const [messages, setMessages] = React.useState([]);
+            const [inputValue, setInputValue] = React.useState('');
+            const [isLoading, setIsLoading] = React.useState(false);
+            
+            const toggleExpanded = () => setIsExpanded(!isExpanded);
+            
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!inputValue.trim() || isLoading) return;
+                
+                const userMessage = {
+                    id: Date.now(),
+                    role: 'user',
+                    content: inputValue.trim(),
+                    timestamp: new Date().toISOString()
+                };
+                
+                setMessages(prev => [...prev, userMessage]);
+                setInputValue('');
+                setIsLoading(true);
+                
+                // Simulate API call
+                setTimeout(() => {
+                    const assistantMessage = {
+                        id: Date.now() + 1,
+                        role: 'assistant',
+                        content: `This is a demo response from ${provider}. In a real implementation, this would call the actual LLM API.`,
+                        timestamp: new Date().toISOString()
+                    };
+                    setMessages(prev => [...prev, assistantMessage]);
+                    setIsLoading(false);
+                }, 1000);
+            };
+            
+            if (!isExpanded) {
+                return (
+                    <div className={`floating-chat-bubble ${position}`} onClick={toggleExpanded}>
+                        <div className="chat-bubble-icon">💬</div>
+                        <div className="chat-bubble-tooltip">Chat with us</div>
+                    </div>
+                );
+            }
+            
+            return (
+                <div className={`chatbot-container chatbot-${theme} floating ${position}`}>
+                    <div className="chatbot-header">
+                        <h3>Demo Chatbot ({provider})</h3>
+                        <div className="header-controls">
+                            <button onClick={toggleExpanded} className="minimize-button">➖</button>
+                        </div>
+                    </div>
+                    
+                    <div className="chat-messages">
+                        {messages.map((message) => (
+                            <div key={message.id} className={`chat-message ${message.role}`}>
+                                <div className="message-content">{message.content}</div>
+                                <div className="message-timestamp">
+                                    {new Date(message.timestamp).toLocaleTimeString()}
+                                </div>
+                            </div>
+                        ))}
+                        
+                        {isLoading && (
+                            <div className="chat-message assistant">
+                                <div className="typing-indicator">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    
+                    <form onSubmit={handleSubmit} className="chat-input-form">
+                        <input
+                            type="text"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            placeholder="Type your message..."
+                            disabled={isLoading}
+                            className="chat-input"
+                        />
+                        <button type="submit" disabled={!inputValue.trim() || isLoading} className="send-button">
+                            {isLoading ? '⏳' : '📤'}
+                        </button>
+                    </form>
+                </div>
+            );
+        }
+        
+        // Render multiple floating chatbots
+        function App() {
+            const openaiKey = document.getElementById('openai-key').value;
+            const anthropicKey = document.getElementById('anthropic-key').value;
+            const geminiKey = document.getElementById('gemini-key').value;
+            
+            return (
+                <div>
+                    {openaiKey && (
+                        <FloatingChatbot
+                            provider="openai"
+                            apiKey={openaiKey}
+                            model="gpt-4o-mini"
+                            position="bottom-right"
+                            theme="light"
+                        />
+                    )}
+                    
+                    {anthropicKey && (
+                        <FloatingChatbot
+                            provider="anthropic"
+                            apiKey={anthropicKey}
+                            model="claude-3-sonnet"
+                            position="bottom-left"
+                            theme="dark"
+                        />
+                    )}
+                    
+                    {geminiKey && (
+                        <FloatingChatbot
+                            provider="gemini"
+                            apiKey={geminiKey}
+                            model="gemini-1.5-pro"
+                            position="top-right"
+                            theme="light"
+                        />
+                    )}
+                </div>
+            );
+        }
+        
+        // Function to update chatbot when API keys change
+        function updateChatbot() {
+            ReactDOM.render(<App />, document.getElementById('chatbot-root'));
+        }
+        
+        // Initial render
+        ReactDOM.render(<App />, document.getElementById('chatbot-root'));
+    </script>
+    
+    <!-- Chatbot container -->
+    <div id="chatbot-root"></div>
+    
+    <!-- Include the CSS -->
+    <link rel="stylesheet" href="../src/SmartChatbot.css">
+</body>
+</html>
