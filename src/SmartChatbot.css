@@ -242,3 +242,182 @@
 .chatbot-dark .chat-messages::-webkit-scrollbar-thumb:hover {
   background-color: #777;
 }
+
+/* Floating Chatbot Styles */
+.floating-chat-bubble {
+  position: fixed;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.floating-chat-bubble:hover {
+  transform: scale(1.1);
+}
+
+.chat-bubble-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.chat-bubble-icon:hover {
+  box-shadow: 0 6px 25px rgba(0, 123, 255, 0.4);
+}
+
+.chat-bubble-tooltip {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.chat-bubble-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.8);
+}
+
+.floating-chat-bubble:hover .chat-bubble-tooltip {
+  opacity: 1;
+}
+
+/* Position variants */
+.floating-chat-bubble.bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.floating-chat-bubble.bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.floating-chat-bubble.top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.floating-chat-bubble.top-left {
+  top: 20px;
+  left: 20px;
+}
+
+/* Floating container styles */
+.chatbot-container.floating {
+  position: fixed;
+  z-index: 1000;
+  width: 350px;
+  height: 500px;
+  max-width: 90vw;
+  max-height: 80vh;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Position the floating container */
+.chatbot-container.floating.bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.chatbot-container.floating.bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.chatbot-container.floating.top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.chatbot-container.floating.top-left {
+  top: 20px;
+  left: 20px;
+}
+
+/* Header controls for floating widget */
+.header-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.minimize-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  color: #666;
+}
+
+.minimize-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-dark .minimize-button {
+  color: #aaa;
+}
+
+.chatbot-dark .minimize-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments for floating widget */
+@media (max-width: 768px) {
+  .chatbot-container.floating {
+    width: calc(100vw - 40px);
+    height: calc(100vh - 120px);
+    max-width: none;
+    max-height: none;
+  }
+  
+  .floating-chat-bubble {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .chatbot-container.floating.bottom-right,
+  .chatbot-container.floating.bottom-left {
+    bottom: 15px;
+    left: 20px;
+    right: 20px;
+  }
+}

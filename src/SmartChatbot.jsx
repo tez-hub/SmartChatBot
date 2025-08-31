@@ -8,12 +8,15 @@ const SmartChatbot = ({
   model,
   conversationId = 'default',
   context = '',
-  theme = 'light'
+  theme = 'light',
+  position = 'bottom-right', // New prop for positioning
+  isFloating = false // New prop to control floating behavior
 }) => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(false); // New state for floating widget
   const messagesEndRef = useRef(null);
 
   // Auto-scroll to bottom when new messages arrive
@@ -82,9 +85,13 @@ const SmartChatbot = ({
     setError(null);
   };
 
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   if (!apiKey || !model) {
     return (
-      <div className={`chatbot-container chatbot-${theme}`}>
+      <div className={`chatbot-container chatbot-${theme} ${isFloating ? 'floating' : ''} ${position}`}>
         <div className="chatbot-error">
           <p>⚠️ Missing required props: apiKey and model are required</p>
         </div>
@@ -92,17 +99,42 @@ const SmartChatbot = ({
     );
   }
 
+  // If it's a floating widget and not expanded, show just the chat bubble
+  if (isFloating && !isExpanded) {
+    return (
+      <div className={`floating-chat-bubble ${position}`} onClick={toggleExpanded}>
+        <div className="chat-bubble-icon">
+          💬
+        </div>
+        <div className="chat-bubble-tooltip">
+          Chat with us
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={`chatbot-container chatbot-${theme}`}>
+    <div className={`chatbot-container chatbot-${theme} ${isFloating ? 'floating' : ''} ${position}`}>
       <div className="chatbot-header">
         <h3>Smart Chatbot ({provider})</h3>
-        <button 
-          onClick={clearConversation}
-          className="clear-button"
-          title="Clear conversation"
-        >
-          🗑️
-        </button>
+        <div className="header-controls">
+          {isFloating && (
+            <button 
+              onClick={toggleExpanded}
+              className="minimize-button"
+              title="Minimize chat"
+            >
+              ➖
+            </button>
+          )}
+          <button 
+            onClick={clearConversation}
+            className="clear-button"
+            title="Clear conversation"
+          >
+            🗑️
+          </button>
+        </div>
       </div>
 
       <div className="chat-messages">
