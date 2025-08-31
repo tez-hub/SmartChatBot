@@ -15,7 +15,12 @@ function formatMessagesForOpenAI(messages, context = '') {
   if (context) {
     formattedMessages.push({
       role: 'system',
-      content: context
+      content: `${context}\n\nIMPORTANT: Respond in plain text only. Do not use markdown formatting like **bold**, *italic*, # headers, or code blocks. Provide clean, readable responses without any special formatting characters.`
+    });
+  } else {
+    formattedMessages.push({
+      role: 'system',
+      content: 'You are a helpful AI assistant. Respond in plain text only. Do not use markdown formatting like **bold**, *italic*, # headers, or code blocks. Provide clean, readable responses without any special formatting characters.'
     });
   }
   
@@ -34,7 +39,12 @@ function formatMessagesForAnthropic(messages, context = '') {
   if (context) {
     formattedMessages.push({
       role: 'user',
-      content: `Context: ${context}\n\nPlease use this context to provide more accurate responses.`
+      content: `Context: ${context}\n\nPlease use this context to provide more accurate responses.\n\nIMPORTANT: Respond in plain text only. Do not use markdown formatting like **bold**, *italic*, # headers, or code blocks. Provide clean, readable responses without any special formatting characters.`
+    });
+  } else {
+    formattedMessages.push({
+      role: 'user',
+      content: `IMPORTANT: Respond in plain text only. Do not use markdown formatting like **bold**, *italic*, # headers, or code blocks. Provide clean, readable responses without any special formatting characters.`
     });
   }
   
@@ -53,7 +63,12 @@ function formatMessagesForGemini(messages, context = '') {
   if (context) {
     formattedMessages.push({
       role: 'user',
-      parts: [{ text: `Context: ${context}\n\nPlease use this context to provide more accurate responses.` }]
+      parts: [{ text: `Context: ${context}\n\nPlease use this context to provide more accurate responses.\n\nIMPORTANT: Respond in plain text only. Do not use markdown formatting like **bold**, *italic*, # headers, or code blocks. Provide clean, readable responses without any special formatting characters.` }]
+    });
+  } else {
+    formattedMessages.push({
+      role: 'user',
+      parts: [{ text: `IMPORTANT: Respond in plain text only. Do not use markdown formatting like **bold**, *italic*, # headers, or code blocks. Provide clean, readable responses without any special formatting characters.` }]
     });
   }
   

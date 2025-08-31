@@ -18,7 +18,7 @@ function App() {
         {/* Floating Chatbot Section */}
         <div className="demo-section">
           <h2>🚀 Floating Chatbot Widget</h2>
-          <p>This chatbot appears as a floating widget at the bottom of the page</p>
+          <p>This chatbot appears as a floating widget at the bottom of the page with automatic markdown cleaning</p>
           
           <div className="api-key-inputs">
             <div className="input-group">
@@ -60,6 +60,7 @@ function App() {
               theme="light"
               isFloating={true}
               position="bottom-right"
+              cleanMarkdown={true}
             />
           )}
         </div>
@@ -81,6 +82,7 @@ function App() {
                   conversationId="demo-openai"
                   theme="light"
                   isFloating={false}
+                  cleanMarkdown={true}
                 />
               )}
             </div>
@@ -96,6 +98,7 @@ function App() {
                   conversationId="demo-anthropic"
                   theme="dark"
                   isFloating={false}
+                  cleanMarkdown={true}
                 />
               )}
             </div>
@@ -111,6 +114,47 @@ function App() {
                   conversationId="demo-gemini"
                   theme="light"
                   isFloating={false}
+                  cleanMarkdown={true}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Markdown Cleaning Demo */}
+        <div className="demo-section">
+          <h2>🧹 Markdown Cleaning Demo</h2>
+          <p>Compare responses with and without markdown cleaning</p>
+          
+          <div className="chatbots-container">
+            <div className="chatbot-section">
+              <h3>✅ With Markdown Cleaning</h3>
+              {openaiKey && (
+                <SmartChatbot
+                  provider="openai"
+                  apiKey={openaiKey}
+                  model="gpt-4o-mini"
+                  conversationId="demo-clean"
+                  theme="light"
+                  isFloating={false}
+                  cleanMarkdown={true}
+                  context="You are a helpful assistant. When responding, demonstrate various markdown formatting like **bold text**, *italic text*, and # headers to show how the cleaning works."
+                />
+              )}
+            </div>
+
+            <div className="chatbot-section">
+              <h3>❌ Without Markdown Cleaning</h3>
+              {openaiKey && (
+                <SmartChatbot
+                  provider="openai"
+                  apiKey={openaiKey}
+                  model="gpt-4o-mini"
+                  conversationId="demo-no-clean"
+                  theme="dark"
+                  isFloating={false}
+                  cleanMarkdown={false}
+                  context="You are a helpful assistant. When responding, demonstrate various markdown formatting like **bold text**, *italic text*, and # headers to show the difference."
                 />
               )}
             </div>
@@ -128,6 +172,7 @@ function App() {
           theme="dark"
           isFloating={true}
           position="bottom-left"
+          cleanMarkdown={true}
         />
       )}
 
@@ -140,6 +185,7 @@ function App() {
           theme="light"
           isFloating={true}
           position="top-right"
+          cleanMarkdown={true}
         />
       )}
     </div>

@@ -72,6 +72,20 @@ If you build and publish your package:
 | `theme` | string | `'light'` | Theme: `'light'` or `'dark'` |
 | `conversationId` | string | `'default'` | Unique ID for conversation persistence |
 | `context` | string | `''` | System context/prompt for the AI |
+| `cleanMarkdown` | boolean | `true` | Remove markdown formatting from AI responses |
+
+## 🧹 Markdown Cleaning
+
+The chatbot automatically removes markdown formatting from AI responses to provide clean, readable text:
+
+- **Bold formatting**: `**text**` → `text`
+- **Italic formatting**: `*text*` → `text`
+- **Headers**: `# Header` → `Header`
+- **Code blocks**: `\`\`\`code\`\`\`` → `code`
+- **Links**: `[text](url)` → `text`
+- **And more...**
+
+You can disable this feature by setting `cleanMarkdown={false}` if you want to preserve markdown formatting.
 
 ## 🎯 Position Examples
 

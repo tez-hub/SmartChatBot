@@ -2,6 +2,34 @@ import React, { useState, useRef, useEffect } from 'react';
 import { callLLM } from './llm.js';
 import './SmartChatbot.css';
 
+// Function to clean markdown formatting from AI responses
+const cleanMarkdownText = (text) => {
+  if (!text) return '';
+  
+  return text
+    // Remove markdown headers
+    .replace(/^#{1,6}\s+/gm, '')
+    // Remove bold formatting
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    // Remove italic formatting
+    .replace(/\*(.*?)\*/g, '$1')
+    // Remove code blocks
+    .replace(/```[\s\S]*?```/g, '')
+    // Remove inline code
+    .replace(/`([^`]+)`/g, '$1')
+    // Remove links but keep text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    // Remove strikethrough
+    .replace(/~~(.*?)~~/g, '$1')
+    // Remove blockquotes
+    .replace(/^>\s+/gm, '')
+    // Remove horizontal rules
+    .replace(/^[-*_]{3,}$/gm, '')
+    // Clean up extra whitespace
+    .replace(/\n\s*\n/g, '\n\n')
+    .trim();
+};
+
 const SmartChatbot = ({
   provider = 'openai',
   apiKey,
@@ -10,7 +38,8 @@ const SmartChatbot = ({
   context = '',
   theme = 'light',
   position = 'bottom-right', // New prop for positioning
-  isFloating = false // New prop to control floating behavior
+  isFloating = false, // New prop to control floating behavior
+  cleanMarkdown = true // New prop to control markdown cleaning
 }) => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -64,10 +93,13 @@ const SmartChatbot = ({
       // Call LLM API
       const response = await callLLM(provider, apiKey, model, conversationHistory, context);
       
+      // Clean the markdown from the AI response if enabled
+      const finalResponse = cleanMarkdown ? cleanMarkdownText(response) : response;
+      
       const assistantMessage = {
         id: Date.now() + 1,
         role: 'assistant',
-        content: response,
+        content: finalResponse,
         timestamp: new Date().toISOString()
       };
 
