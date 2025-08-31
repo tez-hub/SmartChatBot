@@ -14,7 +14,7 @@ A React component for building smart chatbots with support for OpenAI, Anthropic
 ## Installation
 
 ```bash
-npm install smart-chatbot
+Will update soon
 ```
 
 ## Quick Start
